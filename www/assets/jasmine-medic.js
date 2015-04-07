@@ -124,13 +124,12 @@ jasmineRequire.MedicReporter = function(j$) {
     };
 
     this.postTests = function(json) {
-      console.log('posting tests');
-
       var xhr = new XMLHttpRequest();
       var doc_id = [options.sha, json.version, json.model].map(encodeURIComponent).join('__');
       var doc_url = serverurl + '/mobilespec_results/' + doc_id;
+      console.log('Posting test results to: ' + doc_url);
       xhr.open("PUT", doc_url, true);
-      xhr.setRequestHeader("Content-Type","application/json")
+      xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
       xhr.send(JSON.stringify(json));
     }
     return this;
